@@ -1,7 +1,7 @@
 requirejs.config({
     baseUrl: "./mvc",
     paths: {
-        "jquery": "libs/jquery/dist/jquery"
+        "jquery": "lib/jquery/dist/jquery"
     },
 
     shim : {
