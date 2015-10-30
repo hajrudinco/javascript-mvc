@@ -1,0 +1,19 @@
+{
+  "name": "mvc-framework",
+  "version": "0.0.1",
+  "authors": [
+    "Hajrudin Coralic"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "requirejs": "~2.1.20"
+  }
+}
