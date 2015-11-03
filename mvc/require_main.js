@@ -11,7 +11,8 @@ requirejs.config({
 
 
 require([
-    "main"
+    "main",
+    "jquery"
 ], function(MVC){
     window.MVC = MVC;
 });
