@@ -1,6 +1,8 @@
 define(function(require) {
 
-    var Utility = "Hello";
-    return Utility;
+    var Utility = {};
 
+    Utility.Extend = require("utility/extend");
+
+    return Utility;
 });

@@ -1,10 +1,8 @@
 define(function(require) {
 
-    var Utility = require("utility");
-
     var MVC = {};
 
-    MVC.Utility = Utility;
+    MVC.Utility = require('utility/utility');
 
     return MVC;
 });

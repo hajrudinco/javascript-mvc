@@ -2,7 +2,7 @@ requirejs.config({
     baseUrl: "./mvc",
     paths: {
         "jquery": "lib/jquery/dist/jquery",
-        "utility": "utility/utility"
+        "underscore": "lib/underscore/underscore"
     },
 
     shim : {
@@ -13,7 +13,6 @@ requirejs.config({
 
 require([
     "mvc",
-    "utility",
     "jquery"
 ], function(MVC){
     window.MVC = MVC;
