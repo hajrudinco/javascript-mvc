@@ -4,8 +4,10 @@ define(function(require) {
 
     MVC.Utility = require('utility/utility');
     MVC.Model = require('model/model');
+    MVC.List = require('model/list');
 
-    MVC.Model.Extend = MVC.Utility.Extend.doExtend;
+    MVC.Model.Extend =
+        MVC.List.Extend = MVC.Utility.Extend.doExtend;
 
     return MVC;
 });

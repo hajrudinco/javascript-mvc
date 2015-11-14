@@ -3,11 +3,10 @@ define(function(require) {
     var _ = require("underscore");
     var Utility = require("utility/utility");
 
-    var Model = function(data, collection) {
+    var Model = function(data) {
         var self = this;
         data = data || {};
         self.data = data;
-        self.collection = collection;
 
         self.fieldChanged = new Utility.Event(self);
     };
