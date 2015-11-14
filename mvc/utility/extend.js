@@ -43,7 +43,7 @@ define(function(require) {
         /**
          * Override (inherit) properties
          */
-        $.extend(child.prototype, properties);
+        _.extend(child.prototype, properties);
 
         /**
          * Set parent reference
