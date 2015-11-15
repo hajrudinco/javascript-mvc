@@ -1,12 +1,12 @@
 define(function(require) {
 
+    var $ = require("jquery");
     var _ = require("underscore");
     var Utility = require("utility/utility");
 
     var Model = function(data) {
         var self = this;
-        data = data || {};
-        self.data = data;
+        self.data = data || {};
 
         self.fieldChanged = new Utility.Event(self);
     };
@@ -15,7 +15,24 @@ define(function(require) {
         api: "",
         identifier: "id",
         get: function() {
-            throw("TODO");
+            var self = this;
+            var getFn = $.Deferred();
+
+            if (self.api) {
+                $.get(self.api + "/" + self.data[self.identifier]).
+                    done(function(data) {
+                        getFn.resolve(data);
+                    }).
+                    fail(function(response) {
+                        console.log(response);
+                        getFn.reject(response);
+                    });
+            }
+            else {
+                getFn.resolve(self);
+            }
+
+            return getFn.promise();
         },
         put: function() {
             throw("TODO");
