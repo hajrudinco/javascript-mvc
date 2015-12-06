@@ -3,7 +3,8 @@ requirejs.config({
     paths: {
         "jquery": "lib/jquery/dist/jquery",
         "underscore": "lib/underscore/underscore",
-        "history": "lib/history.js/scripts/bundled-uncompressed/html5/jquery.history"
+        "history": "lib/history.js/scripts/bundled-uncompressed/html5/jquery.history",
+        "text" : "lib/requirejs-text/text"
     },
 
     shim : {
@@ -17,7 +18,9 @@ requirejs.config({
 require([
     "mvc",
     "jquery",
-    "history"
-], function(MVC){
+    "underscore",
+    "history",
+    "text"
+], function(MVC, $, _) {
     window.MVC = MVC;
 });

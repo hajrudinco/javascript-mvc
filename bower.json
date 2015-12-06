@@ -15,6 +15,7 @@
   "dependencies": {
     "jquery": "~2.1.4",
     "requirejs": "~2.1.20",
+    "requirejs-text": "~2.0.14",
     "underscore": "~1.8.3",
     "qunit": "~1.20.0",
     "history.js": "~1.8.0"

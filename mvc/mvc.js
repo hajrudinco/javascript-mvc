@@ -7,10 +7,12 @@ define(function(require) {
     MVC.App = require('app/app');
     MVC.Model = require('model/model');
     MVC.List = require('model/list');
+    MVC.View = require('view/view');
 
     MVC.App.Extend =
         MVC.Model.Extend =
-        MVC.List.Extend = MVC.Utility.Extend.doExtend;
+        MVC.List.Extend =
+        MVC.View.Extend = MVC.Utility.Extend.doExtend;
 
     return MVC;
 });
