@@ -6,41 +6,157 @@ define(function(require) {
     var Utility = require("utility/utility");
     var Event = Utility.Event;
 
-    var View = function() {
+    var View = function(controller, data) {
         var self = this;
 
-        self._events = [];
-
-        self.onShow = new Event();
         self.beforeShow = new Event();
+        self.onShow = new Event();
 
-        self.afterHide = new Event();
+        self.beforeDestroy = new Event();
+        self.onDestroy = new Event();
+
+        self.controller = controller;
+        self.data = data;
+
+        self.children = {};
+
+        self.init();
     };
 
     _.extend(View.prototype, {
-        parent: undefined,
-        children: [],
+        parentView: undefined,
 
-        data: {},
+        elementTag: "div",
 
-        containerSelector: "body",
+        element: null, // jQuery element
+        containerSelector: undefined,
 
         template: "",
-        events: {},
+        events: [
+            // {
+            //     "selector": "jQuery selector",
+            //     "event": "event",
+            //     "handler": "handler name"
+            // }
+        ],
+
+        dataEvents: [
+            // {
+            //     "name": "event Name",
+            //     "handler": "handler name"
+            // }
+        ],
 
         render: function() {
             var self = this;
             var template = _.template(self.template);
             var html = template(self.data);
 
-            $(self.containerSelector).html(html);
+            self.element.html(html);
         },
         init: function() {
             // empty function for initialization of other resources
         },
+        destroy: function() {
+            var self = this;
+
+            self.beforeDestroy.notify();
+
+            _.each(self.children, function(child) {
+                child.destroy();
+            });
+
+            self.beforeShow.removeListeners();
+            self.onShow.removeListeners();
+            self.beforeDestroy.removeListeners();
+            self.onDestroy.removeListeners();
+
+            self.removeDataEvents();
+
+            /**
+             * Remove element and all events
+             * binded to it
+             */
+            self.element.remove();
+
+            self.afterDestroy.notify();
+        },
+        getParentElement: function() {
+            var self = this;
+            var parentView = self.parentView;
+
+            if(parentView && parentView.element) {
+                return parentView.element;
+            }
+
+            /**
+             * If nothing is defined, body is used as parent selector
+             */
+            return $("body");
+        },
+        setElement: function() {
+            var self = this;
+            var parentElement = self.getParentElement();
+
+            var element = parentElement.find(self.containerSelector);
+            element.html("<" + self.elementTag + "></" + self.elementTag + ">");
+            element = element.find(self.elementTag).eq(0);
+
+            self.element = element;
+        },
         display: function() {
             var self = this;
+
+            self.beforeShow.notify();
+
+            if(!self.element) self.setElement();
             self.render(self.data);
+            self.initEvents();
+
+            _.each(self.children, function(child) {
+                child.display();
+            });
+
+            self.onShow.notify();
+        },
+        initEvents: function() {
+            var self = this;
+
+            _.each(self.events, function(event) {
+                element.on(event.event, event.selector, function() {
+                    self[event.handler]();
+                });
+            });
+        },
+        initDataEvents: function() {
+            var self = this;
+
+            _.each(self.dataEvents, function(dataEvent) {
+                data[dataEvent.name].attach(function() {
+                    self[dataEvent.handler].apply(self, arguments);
+                });
+            });
+        },
+        removeDataEvents: function() {
+            var self = this;
+
+            _.each(self.dataEvents, function(dataEvent) {
+                data[dataEvent.name].detach(self[dataEvent.handler]);
+            });
+        },
+        setParent: function(parent) {
+            var self = this;
+
+            self.parent = parent;
+        },
+        addChild: function(child) {
+            var self = this;
+
+            child.setParent(self);
+            if(self.children[child.containerSelector]) {
+                self.children[child.containerSelector].destroy();
+            }
+            self.children[child.containerSelector] = child;
         }
     });
 

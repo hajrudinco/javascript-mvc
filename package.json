@@ -15,7 +15,8 @@
     "grunt-newer": "~1.1.1",
     "less": "^2.5.1",
     "requirejs": "~2.1.17",
-    "time-grunt": "~1.1.0"
+    "time-grunt": "~1.1.0",
+    "express": "~4.13.3"
   },
   "private": true
 }
