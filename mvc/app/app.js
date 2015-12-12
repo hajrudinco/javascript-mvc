@@ -7,7 +7,9 @@ define(function(require) {
     var App = function(data) {
         var self = this;
 
-        History.Adapter.bind(window, 'statechange', self.onStateChange);
+        History.Adapter.bind(window, 'statechange', function() {
+            self.onStateChange();
+        });
     };
 
     _.extend(App.prototype, {
@@ -26,7 +28,7 @@ define(function(require) {
 
             self.onStateChange();
         },
-        onStateChange: function() {
+        onStateChange: function(scope) {
             var self = this;
             var state = History.getState();
             var hash = state.hash;

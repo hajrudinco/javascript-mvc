@@ -14,12 +14,14 @@ define(function(require) {
     MVC.List = require('model/list');
     MVC.View = require('view/view');
     MVC.Controller = require('controller/controller');
+    MVC.UrlController = require('controller/url_controller');
 
     MVC.App.Extend =
         MVC.Model.Extend =
         MVC.List.Extend =
         MVC.View.Extend =
-        MVC.Controller.Extend = MVC.Utility.Extend.doExtend;
+        MVC.Controller.Extend =
+        MVC.UrlController.Extend = MVC.Utility.Extend.doExtend;
 
     return MVC;
 });

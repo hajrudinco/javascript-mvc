@@ -1,19 +1,14 @@
 define(function(require) {
 
-    var $ = require("jquery");
     var _ = require("underscore");
 
-    var Controller = function(controllerId) {
+    var Controller = function(view) {
         var self = this;
-        self.controllerId = controllerId;
-        self.init();
+
+        self.view = view;
     };
 
     _.extend(Controller.prototype, {
-        controllerId: undefined,
-        init: function() {
-            // empty function for initialization of other resources
-        }
     });
 
     return Controller;

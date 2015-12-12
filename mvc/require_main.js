@@ -7,8 +7,7 @@ requirejs.config({
         "text": "lib/requirejs-text/text",
 
         // demo app config
-        "demoApp": "demo/app",
-        "initController": "demo/init/controller"
+        "demoApp": "demo/app"
     },
 
     shim : {
@@ -22,14 +21,14 @@ requirejs.config({
 require([
     "mvc",
     "demoApp",
-    "initController"
+    "demo/init/url_controller"
 ], function (
     MVC,
     app,
-    InitController)
-    {
-        app.addController(new InitController("init"));
+    InitUrlController) {
 
-        // start demo app after controller initialization
-        app.start();
+    app.addController(new InitUrlController("init"));
+
+    // start demo app after controller initialization
+    app.start();
 });

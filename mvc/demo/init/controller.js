@@ -4,23 +4,11 @@ define(function(require) {
     var Views = require("demo/init/views");
     var app = require("demoApp");
 
-    var InitController = MVC.Controller.Extend({
-        test: function() {
-            var view = new Views.InitView(self, { "test": "testing" });
-            var view2 = new Views.IndexView(self, { "a": "AAAA", "b": "BBBB"  });
-
-            app.setActiveView(view);
-
-            view.addChild(view2);
-            view.display();
-        },
-        index: function() {
-            var view = new Views.IndexView(self, { "a": "AAAA", "b": "BBBB"  });
-            app.setActiveView(view);
-
-            view.display();
+    var Controller = MVC.Controller.Extend({
+        leftClicked: function() {
+            app.goToState("/init/index");
         }
     });
 
-    return InitController;
+    return Controller;
 });

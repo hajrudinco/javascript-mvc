@@ -1,8 +1,8 @@
 define(function(require) {
 
     var MVC = require("mvc");
-    var initHtml = require("text!demo/init/templates/init.html")
-    var indexHtml = require("text!demo/init/templates/index.html")
+    var initHtml = require("text!demo/init/templates/init.html");
+    var indexHtml = require("text!demo/init/templates/index.html");
 
     var Views = {};
 
@@ -12,7 +12,19 @@ define(function(require) {
 
     Views.IndexView = MVC.View.Extend({
         template: indexHtml,
-        containerSelector: ".left"
+        containerSelector: ".left",
+
+        events: [
+            {
+                "selector": ".left",
+                "event": "click",
+                "handler": "onLeftClick"
+            }
+        ],
+
+        onLeftClick: function() {
+            this.controller.leftClicked();
+        }
     });
 
     return Views;

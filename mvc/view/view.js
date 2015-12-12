@@ -79,7 +79,7 @@ define(function(require) {
              */
             self.element.remove();
 
-            self.afterDestroy.notify();
+            self.onDestroy.notify();
         },
         getParentElement: function() {
             var self = this;
@@ -121,6 +121,7 @@ define(function(require) {
         },
         initEvents: function() {
             var self = this;
+            var element = self.element;
 
             _.each(self.events, function(event) {
                 element.on(event.event, event.selector, function() {
