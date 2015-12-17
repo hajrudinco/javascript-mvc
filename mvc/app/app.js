@@ -48,7 +48,7 @@ define(function(require) {
         setActiveView: function(newView) {
             var self = this;
 
-            newView.element = self.rootElement;
+            newView.parentElement = self.rootElement;
 
             if(self.activeView) {
                 self.activeView.destroy();

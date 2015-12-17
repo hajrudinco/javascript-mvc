@@ -17,6 +17,7 @@ define(function(require) {
 
         self.controller = controller;
         self.data = data;
+        controller.view = self;
 
         self.children = {};
 
@@ -25,6 +26,7 @@ define(function(require) {
 
     _.extend(View.prototype, {
         parentView: undefined,
+        parentElement: undefined,
 
         elementTag: "div",
 
@@ -85,6 +87,16 @@ define(function(require) {
             var self = this;
             var parentView = self.parentView;
 
+            /**
+             * If parent element is set, just return it
+             */
+            if(self.parentElement) {
+                return self.parentElement;
+            }
+
+            /**
+             * Return parentView.element
+             */
             if(parentView && parentView.element) {
                 return parentView.element;
             }
@@ -99,6 +111,13 @@ define(function(require) {
             var parentElement = self.getParentElement();
 
             var element = parentElement.find(self.containerSelector);
+            if(element.length === 0) {
+                element = parentElement;
+            }
+
+            /**
+             * Create wrapping element
+             */
             element.html("<" + self.elementTag + "></" + self.elementTag + ">");
             element = element.find(self.elementTag).eq(0);
 
@@ -109,7 +128,8 @@ define(function(require) {
 
             self.beforeShow.notify();
 
-            if(!self.element) self.setElement();
+            self.setElement();
+
             self.render(self.data);
             self.initEvents();
 
@@ -124,8 +144,8 @@ define(function(require) {
             var element = self.element;
 
             _.each(self.events, function(event) {
-                element.on(event.event, event.selector, function() {
-                    self[event.handler]();
+                element.on(event.event, event.selector, function(e) {
+                    self[event.handler](e);
                 });
             });
         },

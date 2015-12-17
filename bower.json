@@ -18,6 +18,7 @@
     "requirejs-text": "~2.0.14",
     "underscore": "~1.8.3",
     "qunit": "~1.20.0",
-    "history.js": "~1.8.0"
+    "history.js": "~1.8.0",
+    "almond": "~0.3.1"
   }
 }
