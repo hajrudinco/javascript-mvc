@@ -16,6 +16,15 @@ define(function(require) {
             }
         ],
 
+        init: function() {
+            this.beforeDestroy.attach(function() {
+                alert("before destroy");
+            });
+            this.onDestroy.attach(function() {
+                alert("on destroy");
+            });
+        },
+
         onInitClick: function(e) {
             this.controller.goToIndexView();
         }

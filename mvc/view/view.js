@@ -71,7 +71,6 @@ define(function(require) {
             self.beforeShow.removeListeners();
             self.onShow.removeListeners();
             self.beforeDestroy.removeListeners();
-            self.onDestroy.removeListeners();
 
             self.removeDataEvents();
 
@@ -82,6 +81,7 @@ define(function(require) {
             self.element.remove();
 
             self.onDestroy.notify();
+            self.onDestroy.removeListeners();
         },
         getParentElement: function() {
             var self = this;

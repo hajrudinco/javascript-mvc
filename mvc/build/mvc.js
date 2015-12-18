@@ -389,7 +389,6 @@ define('view/view',['require','jquery','underscore','utility/utility'],function(
             self.beforeShow.removeListeners();
             self.onShow.removeListeners();
             self.beforeDestroy.removeListeners();
-            self.onDestroy.removeListeners();
 
             self.removeDataEvents();
 
@@ -400,6 +399,7 @@ define('view/view',['require','jquery','underscore','utility/utility'],function(
             self.element.remove();
 
             self.onDestroy.notify();
+            self.onDestroy.removeListeners();
         },
         getParentElement: function() {
             var self = this;

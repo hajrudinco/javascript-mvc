@@ -7,15 +7,18 @@ define(function(require) {
 
     var UrlController = MVC.UrlController.Extend({
         test: function() {
-            var view = new Views.InitView(new ViewControllers.InitController(), { "test": "testing" });
-            app.setActiveView(view);
+            var controller = new ViewControllers.InitController();
+            var view = new Views.InitView(controller, { "test": "testing" });
 
+            app.setActiveView(view);
             view.display();
         },
         index: function() {
-            var view = new Views.IndexView(new ViewControllers.IndexController(), { "a": "AAAA", "b": "BBBB"  });
-            app.setActiveView(view);
+            var controller = new ViewControllers.IndexController();
+            var view = new Views.IndexView(controller, { "a": "AAAA", "b": "BBBB"  });
+            controller.setViewActions();
 
+            app.setActiveView(view);
             view.display();
         }
     });

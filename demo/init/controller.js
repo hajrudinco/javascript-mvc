@@ -7,6 +7,14 @@ define(function(require) {
     var Controllers = {};
 
     Controllers.IndexController = MVC.Controller.Extend({
+        setViewActions: function() {
+            this.view.beforeShow.attach(function() {
+                alert("View before show")
+            });
+            this.view.onShow.attach(function() {
+                alert("View shown")
+            });
+        },
         formSubmitted: function(value) {
             this.view.writeToOtherArea("Dobrodošli: " + value);
         },
