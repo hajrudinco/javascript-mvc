@@ -7,7 +7,6 @@ define(function(require) {
     /**
      * Extend utility - extends object and initializes inheritance chain
      * @param  {object} properties  properties to override
-     * @param  {object} staticProps [description]
      * @return extended object
      */
     Extend.doExtend = function(properties) {

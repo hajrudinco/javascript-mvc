@@ -21,7 +21,7 @@ define(function(require) {
 
         self.children = {};
 
-        self.init();
+        self.init.apply(self, arguments);
     };
 
     _.extend(View.prototype, {

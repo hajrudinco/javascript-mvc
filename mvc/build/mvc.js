@@ -7,7 +7,6 @@ define('utility/extend',['require','underscore'],function(require) {
     /**
      * Extend utility - extends object and initializes inheritance chain
      * @param  {object} properties  properties to override
-     * @param  {object} staticProps [description]
      * @return extended object
      */
     Extend.doExtend = function(properties) {
@@ -339,7 +338,7 @@ define('view/view',['require','jquery','underscore','utility/utility'],function(
 
         self.children = {};
 
-        self.init();
+        self.init.apply(self, arguments);
     };
 
     _.extend(View.prototype, {
@@ -509,9 +508,13 @@ define('controller/controller',['require','underscore'],function(require) {
         var self = this;
 
         self.view = view;
+        self.init.apply(self, arguments);
     };
 
     _.extend(Controller.prototype, {
+        init: function() {
+            // empty function for initialization
+        }
     });
 
     return Controller;

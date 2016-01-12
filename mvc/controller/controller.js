@@ -6,9 +6,13 @@ define(function(require) {
         var self = this;
 
         self.view = view;
+        self.init.apply(self, arguments);
     };
 
     _.extend(Controller.prototype, {
+        init: function() {
+            // empty function for initialization
+        }
     });
 
     return Controller;

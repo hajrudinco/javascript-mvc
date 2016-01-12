@@ -5,16 +5,18 @@ define(function(require) {
 
     QUnit.module( "Model test" );
     QUnit.test( "Test model event", function( assert ) {
+        // arrange
         var a = new MVC.Model();
         var b = "";
-
         assert.ok( b == "", "b empty" );
-
         a.fieldChanged.attach(function(model, args) {
             b = args.newValue;
         });
 
+        // act
         a.field("test", 5);
+
+        // assert
         assert.ok( b == "5", "b 5" );
     });
 
