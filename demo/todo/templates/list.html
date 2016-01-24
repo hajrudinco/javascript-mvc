@@ -1,0 +1,29 @@
+<thead>
+    <th class="col-md-1">#</th>
+    <th class="col-md-8">Task name</th>
+    <th class="col-md-3"></th>
+</thead>
+<tbody>
+    <% _.each(data.getElements(), function(task, index) { %>
+        <tr>
+            <td><%- index+1 %></td>
+            <td>
+                <% if (task.done) { %>
+                    <del><%- task.name %></del>
+                <% } else { %>
+                    <%- task.name %>
+                <% } %>
+            </td>
+            <td class="text-right">
+                <% if (!task.done) { %>
+                    <button type="submit" class="btn btn-success js-done-task" data-index="<%- index %>">
+                        <span class="glyphicon glyphicon-check"></span> Done
+                    </button>
+                <% } %>
+                <button type="submit" class="btn btn-danger js-remove-task" data-index="<%- index %>">
+                    <span class="glyphicon glyphicon-trash"></span> Remove
+                </button>
+            </td>
+        </tr>
+    <% }); %>
+</tbody>

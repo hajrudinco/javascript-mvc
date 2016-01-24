@@ -27,13 +27,16 @@ requirejs.config({
 require([
     "mvc",
     "demoApp",
-    "demo/init/url_controller"
+    "demo/init/url_controller",
+    "demo/todo/url_controller"
 ], function (
     MVC,
     app,
-    InitUrlController) {
+    InitUrlController,
+    ToDoUrlController) {
 
     app.addController(new InitUrlController("init"));
+    app.addController(new ToDoUrlController("todo"));
 
     // start demo app after controller initialization
     app.start();

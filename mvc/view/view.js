@@ -17,7 +17,6 @@ define(function(require) {
 
         self.controller = controller;
         self.data = data;
-        controller.view = self;
 
         self.children = {};
 
@@ -29,6 +28,7 @@ define(function(require) {
         parentElement: undefined,
 
         elementTag: "div",
+        elementClass: "",
 
         element: null, // jQuery element
         containerSelector: undefined,
@@ -52,7 +52,7 @@ define(function(require) {
         render: function() {
             var self = this;
             var template = _.template(self.template);
-            var html = template(self.data);
+            var html = template({"data": self.data});
 
             self.element.html(html);
         },
@@ -120,6 +120,7 @@ define(function(require) {
              */
             element.html("<" + self.elementTag + "></" + self.elementTag + ">");
             element = element.find(self.elementTag).eq(0);
+            element.addClass(self.elementClass);
 
             self.element = element;
         },
@@ -132,6 +133,8 @@ define(function(require) {
 
             self.render(self.data);
             self.initEvents();
+
+            self.initDataEvents();
 
             _.each(self.children, function(child) {
                 child.display();
@@ -153,7 +156,7 @@ define(function(require) {
             var self = this;
 
             _.each(self.dataEvents, function(dataEvent) {
-                data[dataEvent.name].attach(function() {
+                self.data[dataEvent.name].attach(function() {
                     self[dataEvent.handler].apply(self, arguments);
                 });
             });
@@ -162,7 +165,7 @@ define(function(require) {
             var self = this;
 
             _.each(self.dataEvents, function(dataEvent) {
-                data[dataEvent.name].detach(self[dataEvent.handler]);
+                self.data[dataEvent.name].detach(self[dataEvent.handler]);
             });
         },
         setParent: function(parent) {
