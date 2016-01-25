@@ -8,8 +8,8 @@ define(function(require) {
             this.view = new Views.New(this);
             this.listController = listController;
         },
-        showView: function() {
-            this.view.display();
+        getView: function() {
+            return this.view;
         },
         addNewTask: function(taskName) {
             this.listController.addNewTask(taskName);

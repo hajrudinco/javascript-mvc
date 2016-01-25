@@ -124,8 +124,9 @@ define(function(require) {
 
             self.element = element;
         },
-        display: function() {
+        display: function(displayChildren) {
             var self = this;
+            displayChildren = displayChildren || false;
 
             self.beforeShow.notify();
 
@@ -136,9 +137,11 @@ define(function(require) {
 
             self.initDataEvents();
 
-            _.each(self.children, function(child) {
-                child.display();
-            });
+            if(displayChildren) {
+                _.each(self.children, function(child) {
+                    child.display();
+                });
+            }
 
             self.onShow.notify();
         },

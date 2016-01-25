@@ -138,8 +138,6 @@ define('app/app',['require','history','underscore'],function(require) {
             var parts = hash.split("/");
             parts = _.compact(parts);
 
-            console.log(parts);
-
             // parts[0] - controller
             // parts[1] - controller action
             // parts[2+] - action arguments
@@ -441,8 +439,9 @@ define('view/view',['require','jquery','underscore','utility/utility'],function(
 
             self.element = element;
         },
-        display: function() {
+        display: function(displayChildren) {
             var self = this;
+            displayChildren = displayChildren || false;
 
             self.beforeShow.notify();
 
@@ -453,9 +452,11 @@ define('view/view',['require','jquery','underscore','utility/utility'],function(
 
             self.initDataEvents();
 
-            _.each(self.children, function(child) {
-                child.display();
-            });
+            if(displayChildren) {
+                _.each(self.children, function(child) {
+                    child.display();
+                });
+            }
 
             self.onShow.notify();
         },

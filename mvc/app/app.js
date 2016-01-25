@@ -35,8 +35,6 @@ define(function(require) {
             var parts = hash.split("/");
             parts = _.compact(parts);
 
-            console.log(parts);
-
             // parts[0] - controller
             // parts[1] - controller action
             // parts[2+] - action arguments

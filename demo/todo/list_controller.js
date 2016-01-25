@@ -19,27 +19,19 @@ define(function(require) {
                 }
             ]);
             this.listView = new Views.List(this, this.data);
-
             this.createChildControllers();
-            this.setViewActions();
+            this.setChildren();
         },
         showView: function() {
             app.setActiveView(this.layout);
-            this.layout.display();
+            this.layout.display(true);
         },
         createChildControllers: function() {
             this.newController = new NewController(this);
         },
-        showChildViews: function() {
-            this.listView.display();
-            this.newController.showView();
-        },
-        setViewActions: function() {
-            var self = this;
-
-            self.layout.onShow.attach(function() {
-                self.showChildViews();
-            });
+        setChildren: function() {
+            this.layout.addChild(this.listView);
+            this.layout.addChild(this.newController.getView());
         },
         addNewTask: function(taskName) {
             this.data.addElement({

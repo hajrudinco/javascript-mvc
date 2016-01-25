@@ -13,6 +13,11 @@ define(function(require) {
 
     Views.List = MVC.View.Extend({
         template: listHtml,
+
+        containerSelector: ".js-list",
+        elementTag: "table",
+        elementClass: "table",
+
         events: [
             {
                 "selector": ".js-remove-task",
@@ -25,10 +30,6 @@ define(function(require) {
                 "handler": "onTaskDone"
             }
         ],
-
-        containerSelector: ".js-list",
-        elementTag: "table",
-        elementClass: "table",
 
         dataEvents: [
             {
@@ -79,7 +80,8 @@ define(function(require) {
             e.preventDefault();
 
             var taskName = this.getName().val();
-            this.controller.addNewTask(taskName);
+            if(taskName.length > 0)
+                this.controller.addNewTask(taskName);
         },
 
         resetForm: function() {
